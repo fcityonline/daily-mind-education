@@ -1,0 +1,354 @@
+/* =====================
+   GLOBAL LAYOUT STYLES
+===================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.admin-container {
+  display: flex;
+  height: 100vh;
+  background: #f4f4f4;
+  overflow: hidden;
+  position: relative;
+  font-family: "Poppins", sans-serif;
+}
+
+/* =====================
+      SIDEBAR
+===================== */
+.sidebar {
+  width: 250px;
+  background: #111;
+  color: #fff;
+  padding: 20px;
+  height: 100vh;
+  position: fixed;
+  left: 0;
+  top: 0;
+  transform: translateX(0);
+  transition: 0.3s ease-in-out;
+  z-index: 999;
+}
+
+.sidebar.active {
+  transform: translateX(0);
+}
+
+.sidebar .logo {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.sidebar .logo img {
+  width: 100px;
+  object-fit: contain;
+}
+
+#menuList {
+  list-style: none;
+  margin-top: 20px;
+}
+
+#menuList li {
+  margin-bottom: 12px;
+}
+
+#menuList li button {
+  width: 100%;
+  padding: 12px;
+  background: none;
+  border: none;
+  color: #ddd;
+  text-align: left;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: 0.2s;
+}
+
+#menuList li.active button,
+#menuList li button:hover {
+  background: #333;
+  color: #fff;
+}
+
+.logout {
+  color: #f44336 !important;
+}
+
+/* =====================
+   MOBILE SIDEBAR TOGGLE
+===================== */
+.menu-toggle {
+  display: none;
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  z-index: 1001;
+  font-size: 28px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.sidebar-overlay {
+  display: none;
+}
+
+.sidebar-overlay.active {
+  display: block;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 998;
+}
+
+/* =====================
+   MAIN CONTENT
+===================== */
+.admin-main-content {
+  margin-left: 250px;
+  padding: 25px;
+  width: 100%;
+  overflow-y: auto;
+}
+
+.view-section h1 {
+  margin-bottom: 15px;
+  font-size: 26px;
+  color: #222;
+}
+
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));
+  gap: 20px;
+}
+
+.card {
+  background: #fff;
+  padding: 18px;
+  border-radius: 12px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.chart-container {
+  width: 100%;
+  height: 260px;
+}
+
+.blinking-dot {
+  height: 12px;
+  width: 12px;
+  background: red;
+  border-radius: 50%;
+  display: inline-block;
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  50% { opacity: 0; }
+}
+
+/* =====================
+      TABLES
+===================== */
+.table-container {
+  margin-top: 20px;
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  background: #fff;
+  border-collapse: collapse;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+thead {
+  background: #222;
+  color: #fff;
+}
+
+th, td {
+  padding: 12px 15px;
+  border-bottom: 1px solid #ddd;
+  white-space: nowrap;
+}
+
+.action-btn {
+  padding: 6px 10px;
+  margin-right: 6px;
+  border: none;
+  cursor: pointer;
+  border-radius: 6px;
+  font-size: 14px;
+  color: #fff;
+}
+
+.action-btn.edit { background: #007bff; }
+.action-btn.delete { background: #dc3545; }
+
+/* =====================
+  ADD BUTTONS
+===================== */
+.add-btn {
+  padding: 10px 14px;
+  background: #dc3545;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-right: 8px;
+}
+
+.add-btn2 {
+  padding: 10px 14px;
+  background: #eeff007f;
+  color: #000;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+}
+
+.add-btn3 {
+  padding: 10px 14px;
+  background: #ff0000;
+  color: #fff;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+}
+
+/* =====================
+      MODALS
+===================== */
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+}
+
+.modal-content {
+  background: #fff;
+  padding: 25px;
+  width: 90%;
+  max-width: 430px;
+  border-radius: 12px;
+}
+
+.modal-content input,
+.modal-content select,
+.modal-content textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 12px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+.modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.btn-cancel {
+  padding: 10px 15px;
+  background: #6c757d;
+  border-radius: 8px;
+  color: #fff;
+  border: none;
+}
+
+.btn-save {
+  padding: 10px 15px;
+  background: #28a745;
+  border-radius: 8px;
+  color: #fff;
+  border: none;
+}
+
+/* =====================
+    USER PROFILE PANEL
+===================== */
+.profile-dropdown {
+  position: absolute;
+  right: 20px;
+  top: 70px;
+  width: 250px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  padding: 15px;
+  z-index: 1500;
+}
+
+.profile-dropdown .option {
+  padding: 12px;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: 0.2s;
+}
+
+.profile-dropdown .option:hover {
+  background: #f2f2f2;
+}
+
+/* =====================
+      RESPONSIVE DESIGN
+===================== */
+
+/* MOBILE */
+/* @media (max-width: 900px) {
+
+  .menu-toggle {
+    display: block;
+  }
+
+  .sidebar {
+    transform: translateX(-100%);
+    width: 240px;
+  }
+
+  .sidebar.active {
+    transform: translateX(0);
+  }
+
+  .admin-main-content {
+    margin-left: 0;
+    padding-top: 60px;
+  }
+
+  .cards-grid {
+    grid-template-columns: 1fr;
+  }
+
+  table {
+    font-size: 14px;
+  }
+} */
+
+/* SMALL MOBILE */
+/* @media (max-width: 480px) {
+  .modal-content {
+    padding: 18px;
+  }
+
+  .add-btn, .add-btn2, .add-btn3 {
+    margin-bottom: 8px;
+    width: 100%;
+  }
+
+  td, th {
+    padding: 10px;
+  }
+} */

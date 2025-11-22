@@ -1,0 +1,243 @@
+├───backend
+│   │   .env
+│   │   create-and-test-user.js
+│   │   package-lock.json
+│   │   package.json
+│   │   pilot-users.txt
+│   │   server-maxify.js
+│   │   server.js
+│   │
+│   ├───config
+│   │       db.js
+│   │       redis.js
+│   │
+│   ├───controllers
+│   │       adminAuthController.js
+│   │       adminController.js
+│   │       authController.js
+│   │       blogController.js
+│   │       notificationController.js
+│   │       paymentController.js
+│   │       quizController.js
+│   │       reportController.js
+│   │       tokenController.js
+│   │       userController.js
+│   │
+│   ├───middleware
+│   │       authMiddleware.js
+│   │       errorHandler.js
+│   │       upload.js
+│   │       validateRequest.js
+│   │
+│   ├───models
+│   │       AdminAudit.js
+│   │       Block.js
+│   │       Blog.js
+│   │       DeletionJob.js
+│   │       Notification.js
+│   │       Otp.js
+│   │       Payment.js
+│   │       Quiz.js
+│   │       Report.js
+│   │       User.js
+│   │
+│   ├───routes
+│   │       adminAuthRoutes.js
+│   │       adminRoutes.js
+│   │       authRoutes.js
+│   │       blogRoutes.js
+│   │       notificationRoutes.js
+│   │       paymentRoutes.js
+│   │       quizRoutes.js
+│   │       reportRoutes.js
+│   │       userRoutes.js
+│   │
+│   ├───services
+│   │       razorpayService.js
+│   │
+│   ├───uploads
+│   │   ├───images
+│   │   │       profileImage-1763685904135-413081165.jpg
+│   │   │       profileImage-1763698800695-967249621.png
+│   │   │       profileImage-1763698902887-526267027.png
+│   │   │       profileImage-1763716737144-101893619.png
+│   │   │
+│   │   └───pdfs
+│   │           pdf-1763432799313-907464494.pdf
+│   │           pdf-1763530473374-859671645.pdf
+│   │           pdf-1763531332911-102222466.pdf
+│   │           pdf-1763531674468-418362978.pdf
+│   │           pdf-1763544320843-439675213.pdf
+│   │           pdf-1763544536623-839144802.pdf
+│   │           pdf-1763621772061-160932311.pdf
+│   │           pdf-1763698528795-732951005.pdf
+│   │           pdf-1763700721535-719369809.pdf
+│   │           pdf-1763702298700-342829100.pdf
+│   │           pdf-1763702485674-102456727.pdf
+│   │
+│   └───utils
+│           deletionWorker.js
+│           jobs.js
+│           loginLockout.js
+│           notifications.js
+│           otpService.js
+│           quizScheduler.js
+│           socketQuizOrchestrator.js
+│
+└───frontend
+    │   .env
+    │   package-lock.json
+    │   package.json
+    │
+    ├───public
+    │   │   help.html
+    │   │   index.html
+    │   │
+    │   └───imgs
+    │           icon-check-black.png
+    │           icon-check-green.png
+    │           icon-check-green2.png
+    │           icon-cup-black.png
+    │           icon-cup.png
+    │           icons8-task-100.png
+    │           logo-DME-dark.png
+    │           logo-DME.png
+    │
+    └───src
+        │   App.js
+        │   index.js
+        │   socket.js
+        │
+        ├───components
+        │       AdminProtectedRoute.jsx
+        │       AnimatedContent.jsx
+        │       BottomNavBar.jsx
+        │       DarkModeToggle.jsx
+        │       ErrorBoundary.jsx
+        │       Header.jsx
+        │       NotificationBell.jsx
+        │       NotificationListener.jsx
+        │       ProfileDrawer.jsx
+        │       ProgressBar.jsx
+        │       ProtectedRoute.jsx
+        │       UploadProfileImage.jsx
+        │
+        ├───context
+        │       AdminAuthContext.jsx
+        │       AuthContext.jsx
+        │
+        ├───pages
+        │       AdminForgotPasswordPage.jsx
+        │       AdminLoginPage.jsx
+        │       AdminPanel.css
+        │       AdminPanel.jsx
+        │       AdminRegisterPage.jsx
+        │       EditBlogPage.jsx
+        │       EditProfilePage.jsx
+        │       ForgotPasswordPage.jsx
+        │       HomePage.jsx
+        │       LandingPage.jsx
+        │       LoginPage.jsx
+        │       PaymentHistoryPage.jsx
+        │       PaymentPage.jsx
+        │       ProfilePage.jsx
+        │       QuizAnalyticsPage.jsx
+        │       QuizPage.jsx
+        │       RegisterPage.jsx
+        │       SettingsPage.jsx
+        │       UserBlogsPage.jsx
+        │       WinnersPage.jsx
+        │
+        ├───styles
+        │       global.css
+        │
+        └───utils
+                adminApi.js
+                api.js
+                imageHelper.js
+                notifications.js
+
+
+                
+
+
+
+PS C:\Users\root7\Desktop\zZzip\project-root-\backend> node .\create-and-test-user.js
+[dotenv@17.2.3] injecting env (24) from .env -- tip: ⚙️  write to custom object with { processEnv: myObject }
+MONGODB_URI: mongodb+srv://hnnn:hnnn54321@cluster0.3cswkgb.mongodb.net/dme?retryWrites=true&w=majority&appName=Cluster0
+✅ Connected to MongoDB
+
+🎉 CREATED PILOT USERS AND SAVED TO FILE:
+
+✅ Users saved to 'pilot-users.txt' file.
+======= USER 1 =======
+ID: 691fe1be662461988aeada5e
+Name: Suraj Kumar
+Phone: 9290693389
+Email: pilot_m7xnc@test.com
+Password: z(LDH*hAHA
+JWT Token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5MWZlMWJlNjYyNDYxOTg4YWVhZGE1ZSIsImlhdCI6MTc2MzY5NzA4NywiZXhwIjoxNzY0MzAxODg3fQ.aEWgW_FxDoIuJmij2FRPeFdBu57L4ibB6apSbqrXTx4
+
+======= USER 2 =======
+ID: 691fe1bf662461988aeada65
+Name: Rajesh Maraiya
+Phone: 9978246955
+Email: pilot_oqp70@test.com
+Password: hPDsR7$C4p
+JWT Token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5MWZlMWJmNjYyNDYxOTg4YWVhZGE2NSIsImlhdCI6MTc2MzY5NzA4NywiZXhwIjoxNzY0MzAxODg3fQ.cDrhnKsEmIxkIgcoyqtNCY19_61Fq9VmSuphLwLjfSo
+
+AxODg3fQ.cDrhnKsEmIxkIgcoyqtNCY19_61Fq9VmSuphLwLjfSo
+
+
+======= USER 3 =======
+ID: 691fe1bf662461988aeada67
+Name: Monam Kumari
+Phone: 9639223067
+Email: pilot_qshjo@test.com
+Password: B@iGOV.93r
+Email: pilot_qshjo@test.com
+Password: B@iGOV.93r
+Password: B@iGOV.93r
+JWT Token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5MWZlMWJmNjYyNDYxOTg4YWVhZGE2NyIsImlhdCI6MTc2MzY5NzA4NywiZXhwIjoxNzY0MzAxODg3fQ.KmlTpkumb1Rn0JPMFxOZaWPwmge2jVvUMoLyE1rD87M
+
+Done.                                                            
+                    sktop\zZzip\project-root-\backend>
+
+
+
+
+
+
+
+
+=== Admin ===
+
+id - 9355322204
+pswd - admin@dme
+                    
+=== Pilot Users ===
+
+======= USER 1 =======
+ID: 691fe1be662461988aeada5e
+Name: Suraj Kumar
+Phone: 9290693389
+Email: pilot_m7xnc@test.com
+Password: z(LDH*hAHA
+JWT Token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5MWZlMWJlNjYyNDYxOTg4YWVhZGE1ZSIsImlhdCI6MTc2MzY5NzA4NywiZXhwIjoxNzY0MzAxODg3fQ.aEWgW_FxDoIuJmij2FRPeFdBu57L4ibB6apSbqrXTx4
+
+======= USER 2 =======
+ID: 691fe1bf662461988aeada65
+Name: Rajesh Maraiya
+Phone: 9978246955
+Email: pilot_oqp70@test.com
+Password: hPDsR7$C4p
+JWT Token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5MWZlMWJmNjYyNDYxOTg4YWVhZGE2NSIsImlhdCI6MTc2MzY5NzA4NywiZXhwIjoxNzY0MzAxODg3fQ.cDrhnKsEmIxkIgcoyqtNCY19_61Fq9VmSuphLwLjfSo
+
+======= USER 3 =======
+ID: 691fe1bf662461988aeada67
+Name: Monam Kumari
+Phone: 9639223067
+Email: pilot_qshjo@test.com
+Password: B@iGOV.93r
+JWT Token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5MWZlMWJmNjYyNDYxOTg4YWVhZGE2NyIsImlhdCI6MTc2MzY5NzA4NywiZXhwIjoxNzY0MzAxODg3fQ.KmlTpkumb1Rn0JPMFxOZaWPwmge2jVvUMoLyE1rD87M
+
