@@ -142,10 +142,11 @@ if (process.env.NODE_ENV === "production") {
 //     allowedHeaders: ["Content-Type", "Authorization", "Cookie", "X-Requested-With"],
 //   })
 // );
+// ---------------------- CORS ----------------------
 const allowedOrigins =
   process.env.NODE_ENV === "production"
     ? [
-        process.env.FRONTEND_URL,  // your Vercel frontend
+        process.env.FRONTEND_URL,  // your frontend URL (Vercel, etc.)
       ].filter(Boolean)
     : [
         "http://localhost:3000",
@@ -153,25 +154,31 @@ const allowedOrigins =
         `http://${localIP}:3001`,
       ];
 
-app.use(cors({
-  origin: (origin, cb) => {
-    if (!origin) return cb(null, true); // allow Postman, server-to-server
-    if (allowedOrigins.includes(origin)) return cb(null, true);
+// CORS middleware for all routes
+app.use((req, res, next) => {
+  const origin = req.headers.origin;
+  if (!origin || allowedOrigins.includes(origin)) {
+    res.header("Access-Control-Allow-Origin", origin || "*");
+    res.header("Access-Control-Allow-Credentials", "true");
+    res.header(
+      "Access-Control-Allow-Headers",
+      "Content-Type, Authorization, Cookie, X-Requested-With"
+    );
+    res.header(
+      "Access-Control-Allow-Methods",
+      "GET, POST, PUT, PATCH, DELETE, OPTIONS"
+    );
+    if (req.method === "OPTIONS") {
+      // preflight request
+      return res.sendStatus(204); // No Content
+    }
+    return next();
+  } else {
     console.log("Blocked CORS Origin:", origin);
-    return cb(new Error("CORS blocked"), false);
-  },
-  credentials: true,
-  methods: ["GET","POST","PUT","PATCH","DELETE","OPTIONS"],
-  allowedHeaders: ["Content-Type","Authorization","Cookie","X-Requested-With"],
-}));
+    return res.status(403).json({ success: false, message: "CORS blocked" });
+  }
+});
 
-// preflight handling
-app.options("*", cors({
-  origin: allowedOrigins,
-  credentials: true,
-  methods: ["GET","POST","PUT","PATCH","DELETE","OPTIONS"],
-  allowedHeaders: ["Content-Type","Authorization","Cookie","X-Requested-With"]
-}));
 
 // ---------------------- Basic Middlewares ----------------------
 app.use(cookieParser());
