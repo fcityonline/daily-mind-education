@@ -116,32 +116,62 @@ if (process.env.NODE_ENV === "production") {
 }
 
 // ---------------------- CORS ----------------------
+// const allowedOrigins =
+//   process.env.NODE_ENV === "production"
+//     ? [
+//         process.env.FRONTEND_URL,
+//         "https://dailymindeducation.com",
+//         "https://www.dailymindeducation.com",
+//       ].filter(Boolean)
+//     : [
+//         "http://localhost:3000",
+//         `http://${localIP}:3000`,
+//         `http://${localIP}:3001`,
+//         process.env.FRONTEND_URL,
+//       ].filter(Boolean);
+
+// app.use(
+//   cors({
+//     origin: (origin, cb) => {
+//       if (!origin) return cb(null, true);
+//       if (allowedOrigins.includes(origin)) return cb(null, true);
+//       return cb(new Error("CORS blocked"), false);
+//     },
+//     credentials: true,
+//     methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+//     allowedHeaders: ["Content-Type", "Authorization", "Cookie", "X-Requested-With"],
+//   })
+// );
 const allowedOrigins =
   process.env.NODE_ENV === "production"
     ? [
-        process.env.FRONTEND_URL,
-        "https://dailymindeducation.com",
-        "https://www.dailymindeducation.com",
+        process.env.FRONTEND_URL,  // your Vercel frontend
       ].filter(Boolean)
     : [
         "http://localhost:3000",
         `http://${localIP}:3000`,
         `http://${localIP}:3001`,
-        process.env.FRONTEND_URL,
-      ].filter(Boolean);
+      ];
 
-app.use(
-  cors({
-    origin: (origin, cb) => {
-      if (!origin) return cb(null, true);
-      if (allowedOrigins.includes(origin)) return cb(null, true);
-      return cb(new Error("CORS blocked"), false);
-    },
-    credentials: true,
-    methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
-    allowedHeaders: ["Content-Type", "Authorization", "Cookie", "X-Requested-With"],
-  })
-);
+app.use(cors({
+  origin: (origin, cb) => {
+    if (!origin) return cb(null, true); // allow Postman, server-to-server
+    if (allowedOrigins.includes(origin)) return cb(null, true);
+    console.log("Blocked CORS Origin:", origin);
+    return cb(new Error("CORS blocked"), false);
+  },
+  credentials: true,
+  methods: ["GET","POST","PUT","PATCH","DELETE","OPTIONS"],
+  allowedHeaders: ["Content-Type","Authorization","Cookie","X-Requested-With"],
+}));
+
+// preflight handling
+app.options("*", cors({
+  origin: allowedOrigins,
+  credentials: true,
+  methods: ["GET","POST","PUT","PATCH","DELETE","OPTIONS"],
+  allowedHeaders: ["Content-Type","Authorization","Cookie","X-Requested-With"]
+}));
 
 // ---------------------- Basic Middlewares ----------------------
 app.use(cookieParser());
