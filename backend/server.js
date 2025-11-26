@@ -143,22 +143,61 @@ if (process.env.NODE_ENV === "production") {
 //   })
 // );
 // ---------------------- CORS ----------------------
+// const allowedOrigins =
+//   process.env.NODE_ENV === "production"
+//     ? [
+//         process.env.FRONTEND_URL,  // your frontend URL (Vercel, etc.)
+//       ].filter(Boolean)
+//     : [
+//         "http://localhost:3000",
+//         `http://${localIP}:3000`,
+//         `http://${localIP}:3001`,
+//       ];
+
+// // CORS middleware for all routes
+// app.use((req, res, next) => {
+//   const origin = req.headers.origin;
+//   if (!origin || allowedOrigins.includes(origin)) {
+//     res.header("Access-Control-Allow-Origin", origin || "*");
+//     res.header("Access-Control-Allow-Credentials", "true");
+//     res.header(
+//       "Access-Control-Allow-Headers",
+//       "Content-Type, Authorization, Cookie, X-Requested-With"
+//     );
+//     res.header(
+//       "Access-Control-Allow-Methods",
+//       "GET, POST, PUT, PATCH, DELETE, OPTIONS"
+//     );
+//     if (req.method === "OPTIONS") {
+//       // preflight request
+//       return res.sendStatus(204); // No Content
+//     }
+//     return next();
+//   } else {
+//     console.log("Blocked CORS Origin:", origin);
+//     return res.status(403).json({ success: false, message: "CORS blocked" });
+//   }
+// });
+// ---------------------- FIXED CORS ----------------------
 const allowedOrigins =
   process.env.NODE_ENV === "production"
     ? [
-        process.env.FRONTEND_URL,  // your frontend URL (Vercel, etc.)
-      ].filter(Boolean)
+        "https://dailymindeducatonfrontend.vercel.app",
+        "https://dailymindeducatonfrontend-80fos0nw0-fcityonline-projects.vercel.app",
+        "https://dailymindeducation.com",
+        "https://www.dailymindeducation.com",
+      ]
     : [
         "http://localhost:3000",
         `http://${localIP}:3000`,
         `http://${localIP}:3001`,
       ];
 
-// CORS middleware for all routes
 app.use((req, res, next) => {
   const origin = req.headers.origin;
-  if (!origin || allowedOrigins.includes(origin)) {
-    res.header("Access-Control-Allow-Origin", origin || "*");
+
+  if (allowedOrigins.includes(origin)) {
+    res.header("Access-Control-Allow-Origin", origin);
     res.header("Access-Control-Allow-Credentials", "true");
     res.header(
       "Access-Control-Allow-Headers",
@@ -168,16 +207,17 @@ app.use((req, res, next) => {
       "Access-Control-Allow-Methods",
       "GET, POST, PUT, PATCH, DELETE, OPTIONS"
     );
+
     if (req.method === "OPTIONS") {
-      // preflight request
-      return res.sendStatus(204); // No Content
+      return res.sendStatus(204);
     }
-    return next();
   } else {
-    console.log("Blocked CORS Origin:", origin);
-    return res.status(403).json({ success: false, message: "CORS blocked" });
+    console.log("❌ Blocked CORS Origin:", origin);
   }
+
+  next();
 });
+
 
 
 // ---------------------- Basic Middlewares ----------------------
