@@ -179,11 +179,48 @@ if (process.env.NODE_ENV === "production") {
 //   }
 // });
 // ---------------------- FIXED CORS ----------------------
+// const allowedOrigins =
+//   process.env.NODE_ENV === "production"
+//     ? [
+//         "https://dailymindeducatonfrontend.vercel.app",
+//         "https://dailymindeducatonfrontend-80fos0nw0-fcityonline-projects.vercel.app",
+//         "https://dailymindeducation.com",
+//         "https://www.dailymindeducation.com",
+//       ]
+//     : [
+//         "http://localhost:3000",
+//         `http://${localIP}:3000`,
+//         `http://${localIP}:3001`,
+//       ];
+
+// app.use((req, res, next) => {
+//   const origin = req.headers.origin;
+
+//   if (allowedOrigins.includes(origin)) {
+//     res.header("Access-Control-Allow-Origin", origin);
+//     res.header("Access-Control-Allow-Credentials", "true");
+//     res.header(
+//       "Access-Control-Allow-Headers",
+//       "Content-Type, Authorization, Cookie, X-Requested-With"
+//     );
+//     res.header(
+//       "Access-Control-Allow-Methods",
+//       "GET, POST, PUT, PATCH, DELETE, OPTIONS"
+//     );
+
+//     if (req.method === "OPTIONS") {
+//       return res.sendStatus(204);
+//     }
+//   } else {
+//     console.log("❌ Blocked CORS Origin:", origin);
+//   }
+
+//   next();
+// });
 const allowedOrigins =
   process.env.NODE_ENV === "production"
     ? [
         "https://dailymindeducatonfrontend.vercel.app",
-        "https://dailymindeducatonfrontend-80fos0nw0-fcityonline-projects.vercel.app",
         "https://dailymindeducation.com",
         "https://www.dailymindeducation.com",
       ]
@@ -195,8 +232,9 @@ const allowedOrigins =
 
 app.use((req, res, next) => {
   const origin = req.headers.origin;
+  const isVercelPreview = origin?.endsWith(".vercel.app");
 
-  if (allowedOrigins.includes(origin)) {
+  if (allowedOrigins.includes(origin) || isVercelPreview) {
     res.header("Access-Control-Allow-Origin", origin);
     res.header("Access-Control-Allow-Credentials", "true");
     res.header(
@@ -208,9 +246,7 @@ app.use((req, res, next) => {
       "GET, POST, PUT, PATCH, DELETE, OPTIONS"
     );
 
-    if (req.method === "OPTIONS") {
-      return res.sendStatus(204);
-    }
+    if (req.method === "OPTIONS") return res.sendStatus(204);
   } else {
     console.log("❌ Blocked CORS Origin:", origin);
   }
